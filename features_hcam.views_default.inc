@@ -660,7 +660,7 @@ function features_hcam_views_default_views() {
   $handler->display->display_options['filters']['date_filter']['group'] = '0';
   $handler->display->display_options['filters']['date_filter']['expose']['operator'] = FALSE;
   $handler->display->display_options['filters']['date_filter']['granularity'] = 'month';
-  $handler->display->display_options['filters']['date_filter']['default_date'] = 'today';
+  $handler->display->display_options['filters']['date_filter']['default_date'] = 'now';
   $handler->display->display_options['filters']['date_filter']['year_range'] = '-0:+0';
   $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
     'node_data_field_date.field_date_value' => 'node_data_field_date.field_date_value',
@@ -716,6 +716,10 @@ function features_hcam_views_default_views() {
     4 => 0,
     6 => 0,
   );
+  $handler->display->display_options['filters']['body_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['body_value']['group_info']['label'] = 'Body (body)';
+  $handler->display->display_options['filters']['body_value']['group_info']['identifier'] = 'body_value';
+  $handler->display->display_options['filters']['body_value']['group_info']['remember'] = FALSE;
   /* Filter criterion: Date: Date (node) */
   $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
   $handler->display->display_options['filters']['date_filter']['table'] = 'node';
@@ -734,71 +738,6 @@ function features_hcam_views_default_views() {
     'node_data_field_date.field_date_value' => 'node_data_field_date.field_date_value',
   );
   $handler->display->display_options['path'] = 'schedule';
-
-  /* Display: Attachment */
-  $handler = $view->new_display('attachment', 'Attachment', 'attachment_1');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['items_per_page'] = 0;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Broken/missing handler */
-  $handler->display->display_options['fields']['field_date_value']['id'] = 'field_date_value';
-  $handler->display->display_options['fields']['field_date_value']['table'] = 'node_data_field_date';
-  $handler->display->display_options['fields']['field_date_value']['field'] = 'field_date_value';
-  $handler->display->display_options['fields']['field_date_value']['label'] = '';
-  $handler->display->display_options['fields']['field_date_value']['alter']['text'] = '<h2>[field_date_value]</h2>';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = '1';
-  $handler->display->display_options['filters']['status']['group'] = '0';
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'schedule' => 'schedule',
-  );
-  $handler->display->display_options['filters']['type']['group'] = '0';
-  $handler->display->display_options['filters']['type']['expose']['operator'] = FALSE;
-  /* Filter criterion: Date: Date (node) */
-  $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
-  $handler->display->display_options['filters']['date_filter']['table'] = 'node';
-  $handler->display->display_options['filters']['date_filter']['field'] = 'date_filter';
-  $handler->display->display_options['filters']['date_filter']['operator'] = '>';
-  $handler->display->display_options['filters']['date_filter']['group'] = '0';
-  $handler->display->display_options['filters']['date_filter']['expose']['operator'] = FALSE;
-  $handler->display->display_options['filters']['date_filter']['default_date'] = 'now';
-  $handler->display->display_options['filters']['date_filter']['year_range'] = '-0:+0';
-  $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
-    'node_data_field_date.field_date_value' => 'node_data_field_date.field_date_value',
-  );
-  $handler->display->display_options['filters']['date_filter']['date_method'] = 'AND';
-  /* Filter criterion: Broken/missing handler */
-  $handler->display->display_options['filters']['field_date_value']['id'] = 'field_date_value';
-  $handler->display->display_options['filters']['field_date_value']['table'] = 'node_data_field_date';
-  $handler->display->display_options['filters']['field_date_value']['field'] = 'field_date_value';
-  $handler->display->display_options['filters']['field_date_value']['value'] = array(
-    'min' => NULL,
-    'max' => NULL,
-    'value' => NULL,
-    'default_date' => 'now',
-    'default_to_date' => '',
-  );
-  $handler->display->display_options['filters']['field_date_value']['group'] = '0';
-  $handler->display->display_options['filters']['field_date_value']['expose']['operator'] = FALSE;
-  $handler->display->display_options['displays'] = array(
-    'page_1' => 'page_1',
-    'default' => 0,
-  );
-  $handler->display->display_options['attachment_position'] = 'after';
-  $handler->display->display_options['inherit_arguments'] = FALSE;
-  $handler->display->display_options['inherit_exposed_filters'] = TRUE;
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block_1');
@@ -835,6 +774,67 @@ function features_hcam_views_default_views() {
     'node_data_field_date.field_date_value' => 'node_data_field_date.field_date_value',
   );
   $handler->display->display_options['block_description'] = 'Schedule (Views)';
+
+  /* Display: Attachment 2 */
+  $handler = $view->new_display('attachment', 'Attachment 2', 'attachment_2');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Date */
+  $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
+  $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
+  $handler->display->display_options['fields']['field_date']['field'] = 'field_date';
+  $handler->display->display_options['fields']['field_date']['label'] = '';
+  $handler->display->display_options['fields']['field_date']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['field_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_date']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_date']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = '0';
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'schedule' => 'schedule',
+  );
+  $handler->display->display_options['filters']['type']['group'] = '0';
+  $handler->display->display_options['filters']['type']['expose']['operator'] = FALSE;
+  /* Filter criterion: Date: Date (node) */
+  $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['table'] = 'node';
+  $handler->display->display_options['filters']['date_filter']['field'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['group'] = '0';
+  $handler->display->display_options['filters']['date_filter']['expose']['operator'] = FALSE;
+  $handler->display->display_options['filters']['date_filter']['granularity'] = 'month';
+  $handler->display->display_options['filters']['date_filter']['default_date'] = 'now';
+  $handler->display->display_options['filters']['date_filter']['year_range'] = '-0:+0';
+  $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
+    'node_data_field_date.field_date_value' => 'node_data_field_date.field_date_value',
+  );
+  /* Filter criterion: Date: Date (node) */
+  $handler->display->display_options['filters']['date_filter_1']['id'] = 'date_filter_1';
+  $handler->display->display_options['filters']['date_filter_1']['table'] = 'node';
+  $handler->display->display_options['filters']['date_filter_1']['field'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter_1']['operator'] = '>';
+  $handler->display->display_options['filters']['date_filter_1']['form_type'] = 'date_text';
+  $handler->display->display_options['filters']['date_filter_1']['default_date'] = 'now';
+  $handler->display->display_options['filters']['date_filter_1']['date_fields'] = array(
+    'field_data_field_date.field_date_value' => 'field_data_field_date.field_date_value',
+  );
   $export['schedule'] = $view;
 
   $view = new view();
