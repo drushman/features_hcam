@@ -716,10 +716,14 @@ function features_hcam_views_default_views() {
     4 => 0,
     6 => 0,
   );
-  $handler->display->display_options['filters']['body_value']['is_grouped'] = TRUE;
   $handler->display->display_options['filters']['body_value']['group_info']['label'] = 'Body (body)';
   $handler->display->display_options['filters']['body_value']['group_info']['identifier'] = 'body_value';
   $handler->display->display_options['filters']['body_value']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['body_value']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
+  );
   /* Filter criterion: Date: Date (node) */
   $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
   $handler->display->display_options['filters']['date_filter']['table'] = 'node';
@@ -780,12 +784,25 @@ function features_hcam_views_default_views() {
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['alter']['path'] = '[nid] ';
+  $handler->display->display_options['fields']['nid']['alter']['absolute'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
   /* Field: Content: Date */
   $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
   $handler->display->display_options['fields']['field_date']['field'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['label'] = '';
-  $handler->display->display_options['fields']['field_date']['element_type'] = 'h2';
+  $handler->display->display_options['fields']['field_date']['alter']['text'] = '[field_date] ';
+  $handler->display->display_options['fields']['field_date']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_date']['alter']['path'] = 'node/[nid] ';
+  $handler->display->display_options['fields']['field_date']['alter']['absolute'] = TRUE;
   $handler->display->display_options['fields']['field_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_date']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_date']['settings'] = array(
@@ -835,6 +852,12 @@ function features_hcam_views_default_views() {
   $handler->display->display_options['filters']['date_filter_1']['date_fields'] = array(
     'field_data_field_date.field_date_value' => 'field_data_field_date.field_date_value',
   );
+  $handler->display->display_options['displays'] = array(
+    'page_1' => 'page_1',
+    'default' => 0,
+    'block_1' => 0,
+  );
+  $handler->display->display_options['attachment_position'] = 'after';
   $export['schedule'] = $view;
 
   $view = new view();
